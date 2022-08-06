@@ -1,6 +1,8 @@
 package com.bootcamp.bookshop.book;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,8 +20,11 @@ public class BookController {
 
 
     @GetMapping("/books")
-    List<BookResponse> list() {
+    ResponseEntity<List<BookResponse>> list() {
         List<Book> books = bookService.fetchAll();
-        throw new NullPointerException();
+        List<BookResponse> bookResponse =  books.stream()
+                .map(Book::toResponse)
+                .collect(Collectors.toList());
+        return new ResponseEntity<>(bookResponse, HttpStatus.OK);
     }
 }

@@ -27,6 +27,7 @@ public class User {
     private String email;
     @NotBlank(message = "Password is mandatory")
     private String password;
+    private String token;
     @Enumerated(EnumType.STRING)
     private Role role;
     private String firstName;
@@ -38,18 +39,19 @@ public class User {
     public User() {
     }
 
-    private User(String email, String password, Role role) {
+    private User(String email, String password, Role role, String token) {
         this.email = email;
         this.password = password;
         this.role = role;
+        this.token = token;
     }
 
-    public static User create(CreateUserRequest userRequest) {
+    public static User create(CreateUserRequest userRequest, String token) {
         String password = "";
         if (!userRequest.getPassword().isEmpty()) {
             password = PASSWORD_ENCODER.encode(userRequest.getPassword());
         }
-        return new User(userRequest.getEmail(), password, Role.USER);
+        return new User(userRequest.getEmail(), password, Role.USER, token);
     }
 
     public void update(UpdateUserRequest updateUserRequest) {

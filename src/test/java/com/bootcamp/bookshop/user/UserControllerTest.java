@@ -68,7 +68,7 @@ class UserControllerTest {
     @Test
     void shouldRespondWithErrorMessageWhenCreateUserValidationFails() throws Exception {
         CreateUserRequest userCredentials = new CreateUserRequest("", "foobar");
-        Set<ConstraintViolation<User>> violations = validator.validate(User.create(userCredentials));
+        Set<ConstraintViolation<User>> violations = validator.validate(User.create(userCredentials, "abcs"));
         when(userService.create(userCredentials)).thenThrow(new ConstraintViolationException(violations));
 
         mockMvc.perform(post("/users")

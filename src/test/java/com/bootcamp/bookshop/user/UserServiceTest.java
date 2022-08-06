@@ -51,7 +51,7 @@ class UserServiceTest {
     void shouldNotCreateUserWhenUserWithSameEmailAlreadyExists() {
         CreateUserRequest userRequest = new CreateUserRequestTestBuilder().build();
         when(userRepository.findByEmail(userRequest.getEmail())).thenReturn(Optional.of(new User()));
-        userRepository.save(User.create(userRequest));
+        userRepository.save(User.create(userRequest, "abcs"));
 
         InvalidEmailException createUserException = assertThrows(InvalidEmailException.class,
                 () -> userService.create(userRequest));

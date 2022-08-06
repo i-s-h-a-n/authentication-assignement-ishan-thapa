@@ -15,7 +15,7 @@ class UserTest {
     @Test
     void shouldBeEmailMandatory() {
         CreateUserRequest userRequest = new CreateUserRequestTestBuilder().withEmptyEmail().build();
-        User user = User.create(userRequest);
+        User user = User.create(userRequest, "abcs");
 
         Set<ConstraintViolation<User>> constraintViolations = constraintsValidator().validate(user);
 
@@ -27,7 +27,7 @@ class UserTest {
     @Test
     void shouldBePasswordMandatory() {
         CreateUserRequest userRequest = new CreateUserRequestTestBuilder().withEmptyPassword().build();
-        User user = User.create(userRequest);
+        User user = User.create(userRequest, "abcs");
 
         Set<ConstraintViolation<User>> constraintViolations = constraintsValidator().validate(user);
 
@@ -38,7 +38,7 @@ class UserTest {
     @Test
     void shouldCreateUserEncryptPassword() {
         CreateUserRequest userRequest = new CreateUserRequestTestBuilder().build();
-        User user = User.create(userRequest);
+        User user = User.create(userRequest, "abcs");
 
         Assertions.assertTrue(User.PASSWORD_ENCODER.matches("foobar", user.getPassword()));
     }

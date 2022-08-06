@@ -6,7 +6,7 @@ plugins {
 
 group = 'com.bootcamp'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '18'
+sourceCompatibility = '1.8'
 
 configurations {
 	compileOnly {
@@ -28,7 +28,7 @@ dependencies {
 	testCompileOnly 'org.projectlombok:lombok'
 	testAnnotationProcessor 'org.projectlombok:lombok'
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
-
+	implementation 'io.jsonwebtoken:jjwt:0.9.1'
 	runtimeOnly 'com.h2database:h2'
 	runtimeOnly 'org.postgresql:postgresql'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
